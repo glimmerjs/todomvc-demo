@@ -1,0 +1,19 @@
+<li class="{{if @todo.completed "completed"}} {{if editing "editing"}}">
+  <div class="view">
+    <input type="checkbox"
+           class="toggle"
+           checked={{@todo.completed}} 
+           onchange={{action @onToggle @todo}}>
+
+    <label ondblclick={{action beginEdit}}>{{@todo.title}}</label>
+
+    <button class="destroy" onclick={{action @onDestroy @todo}}></button>
+  </div>
+
+  <input type="text"
+         class="edit"
+         value={{newTitle}}
+         onblur={{action commitEdit}}
+         onkeydown={{action handleEditKeyDown}}
+         autofocus>
+</li>

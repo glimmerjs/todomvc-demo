@@ -1,0 +1,48 @@
+<section id="todoapp">
+  <header id="header">
+    <h1>todos</h1>
+    <input id="new-todo"
+           placeholder="What needs to be done?"
+           onkeydown={{action onNewTodoKeyDown}}
+           autofocus>
+  </header>
+
+  {{#each visibleTodos key="id" as |todo|}}
+    <ul id="todo-list" class="todo-list">
+      <todo-item @todo={{todo}}
+                 @onEdit={{action editTodo}}
+                 @onToggle={{action toggleTodo}}
+                 @onDestroy={{action removeTodo}} />
+    </ul>
+  {{/each}}
+
+  {{#if todos.length}}
+    <footer id="footer">
+      <span id="todo-count">
+        <strong>{{activeTodos.length}}</strong>
+        {{#if (eq activeTodos.length 1)}}
+          item
+        {{else}}
+          items
+        {{/if}}
+        left
+      </span>
+      <ul id="filters">
+        <li><a href="#" class="{{if (eq mode 'all') "selected"}}" onclick={{action onModeClick 'all'}}>All</a></li>
+        <li><a href="#" class="{{if (eq mode 'active') "selected"}}" onclick={{action onModeClick 'active'}}>Active</a></li>
+        <li><a href="#" class="{{if (eq mode 'completed') "selected"}}" onclick={{action onModeClick 'completed'}}>Completed</a></li>
+      </ul>
+      {{#if completedTodos.length}}
+        <button id="clear-completed" onclick={{action clearCompleted}}>Clear completed</button>
+      {{/if}}
+    </footer>
+  {{/if}}
+</section>
+<footer id="info">
+  <p>Double-click to edit a todo</p>
+  <p>
+    Created by
+    <a href="https://github.com/glimmerjs/todomvc-demo/graphs/contributors">Glimmer.js contributors</a>
+  </p>
+  <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
