@@ -7,14 +7,22 @@
            autofocus>
   </header>
 
-  {{#each visibleTodos key="id" as |todo|}}
-    <ul id="todo-list" class="todo-list">
-      <todo-item @todo={{todo}}
-                 @onEdit={{action editTodo}}
-                 @onToggle={{action toggleTodo}}
-                 @onDestroy={{action removeTodo}} />
-    </ul>
-  {{/each}}
+
+  <section id="main">
+    {{#if canToggle}}
+      <input type="checkbox" id="toggle-all" checked={{allCompleted}} onchange={{action toggleAll}}>
+    {{/if}}
+
+    {{#each visibleTodos key="id" as |todo|}}
+      <ul id="todo-list" class="todo-list">
+        <todo-item @todo={{todo}}
+                   @onEdit={{action editTodo}}
+                   @onToggle={{action toggleTodo}}
+                   @onDestroy={{action removeTodo}} />
+      </ul>
+    {{/each}}
+  </section>
+
 
   {{#if todos.length}}
     <footer id="footer">

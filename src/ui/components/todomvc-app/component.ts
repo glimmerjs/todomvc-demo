@@ -35,6 +35,14 @@ export default class TodoMVCApp extends Component {
     }
   }
 
+  @tracked('todos') get allCompleted() {
+    return this.todos.every(todo => todo.completed);
+  }
+
+  @tracked('todos') get canToggle() {
+    return this.todos.length > 0;
+  }
+
   onModeClick(mode) {
     this.mode = mode;
   }
@@ -42,11 +50,11 @@ export default class TodoMVCApp extends Component {
   onNewTodoKeyDown(event) {
     if (event.which === 13) {
       let value = event.target.value.trim();
-      if (value.length > 0) {
 
-      this.createTodo(event.target.value.trim());
+      if (value.length > 0) {
+        this.createTodo(event.target.value.trim());
       }
-      
+
       event.target.value = '';
     }
   }
@@ -67,6 +75,12 @@ export default class TodoMVCApp extends Component {
 
   toggleTodo(todo) {
     todo.toggle();
+    this.todos = this.todos;
+  }
+
+  toggleAll() {
+    let allCompleted = this.allCompleted;
+    this.todos.forEach(todo => todo.completed = !allCompleted);
     this.todos = this.todos;
   }
 
