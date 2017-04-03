@@ -52,7 +52,7 @@ export default class TodoMVCApp extends Component {
       let value = event.target.value.trim();
 
       if (value.length > 0) {
-        this.createTodo(event.target.value.trim());
+        this.createTodo(value);
       }
 
       event.target.value = '';
