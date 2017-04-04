@@ -11,9 +11,9 @@
   </div>
 
   <input type="text"
-         class="edit"
+         class="edit js-edit"
          value={{newTitle}}
          onblur={{action commitEdit}}
-         onkeydown={{action handleEditKeyDown}}
+         onkeyup={{action handleEditKeyUp}}
          autofocus>
 </li>
