@@ -1,4 +1,7 @@
 import Component, { tracked } from "@glimmer/component";
+import Navigo from 'navigo';
+
+const router = new Navigo(null, true);
 
 class Todo {
   id: number = Date.now();
@@ -18,6 +21,18 @@ class Todo {
 export default class TodoMVCApp extends Component {
   @tracked todos: Todo[] = [];
   @tracked mode: string = 'all';
+
+  constructor(options) {
+    super(options);
+
+    router
+      .on({
+        '/': () => { this.mode = 'all'; },
+        '/active': () => { this.mode = 'active'; },
+        '/completed': () => { this.mode = 'completed'; },
+      })
+      .resolve();
+  }
 
   @tracked('todos') get activeTodos() {
     return this.todos.filter(todo => !todo.completed)
@@ -41,10 +56,6 @@ export default class TodoMVCApp extends Component {
 
   @tracked('todos') get canToggle() {
     return this.todos.length > 0;
-  }
-
-  onModeClick(mode) {
-    this.mode = mode;
   }
 
   onNewTodoKeyDown(event) {

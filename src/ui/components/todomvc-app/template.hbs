@@ -36,9 +36,9 @@
         left
       </span>
       <ul id="filters">
-        <li><a href="#" class="{{if (eq mode 'all') "selected"}}" onclick={{action onModeClick 'all'}}>All</a></li>
-        <li><a href="#" class="{{if (eq mode 'active') "selected"}}" onclick={{action onModeClick 'active'}}>Active</a></li>
-        <li><a href="#" class="{{if (eq mode 'completed') "selected"}}" onclick={{action onModeClick 'completed'}}>Completed</a></li>
+        <li><a href="#/" class="{{if (eq mode 'all') "selected"}}">All</a></li>
+        <li><a href="#/active" class="{{if (eq mode 'active') "selected"}}">Active</a></li>
+        <li><a href="#/completed" class="{{if (eq mode 'completed') "selected"}}">Completed</a></li>
       </ul>
       {{#if completedTodos.length}}
         <button id="clear-completed" onclick={{action clearCompleted}}>Clear completed</button>
