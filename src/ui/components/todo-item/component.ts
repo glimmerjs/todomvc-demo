@@ -10,11 +10,10 @@ export default class TodoItem extends Component {
   beginEdit() {
     this.editing = true;
     this.newTitle = this.args.todo.title;
-    
-    // temporary solution
-    setTimeout(() => {
+
+    requestAnimationFrame(() => {
       this.element.querySelector('.js-edit').focus();
-    }, 30);
+    });
   }
 
   commitEdit() {
