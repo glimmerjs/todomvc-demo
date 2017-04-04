@@ -14,6 +14,8 @@
     "@glimmer/application-pipeline": "^0.5.1",
     "@glimmer/component": "^0.3.8",
     "@glimmer/resolver": "^0.3.0",
+    "broccoli-concat": "^3.2.2",
+    "broccoli-merge-trees": "^2.0.0",
     "ember-cli": "2.12.1",
     "ember-cli-inject-live-reload": "^1.6.1",
     "typescript": "^2.2.2"
@@ -21,5 +23,9 @@
   "engines": {
     "node": ">= 4.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "todomvc-app-css": "^2.1.0",
+    "todomvc-common": "^1.0.3"
+  }
 }
