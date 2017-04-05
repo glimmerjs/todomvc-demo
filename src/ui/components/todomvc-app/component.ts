@@ -1,29 +1,24 @@
 import Component, { tracked } from "@glimmer/component";
 import Navigo from 'navigo';
+import TodoStore from '../../../utils/todo-store';
+import Todo from '../utils/todo';
 
 const router = new Navigo(null, true);
 
-class Todo {
-  id: number = Date.now();
-  title: string;
-  @tracked completed: boolean;
 
-  constructor(title, completed=false) {
-    this.title = title;
-    this.completed = completed;
-  }
-
-  toggle() {
-    this.completed = !this.completed;
-  }
-}
 
 export default class TodoMVCApp extends Component {
+
+  storage: TodoStore;
+
   @tracked todos: Todo[] = [];
   @tracked mode: string = 'all';
 
   constructor(options) {
     super(options);
+
+    this.storage = new TodoStore();
+    this.todos = this.storage.restore();
 
     router
       .on({
@@ -58,6 +53,15 @@ export default class TodoMVCApp extends Component {
     return this.todos.length > 0;
   }
 
+  persistTodos() {
+    this.storage.store(this.todos);
+  }
+
+  commitTodos() {
+    this.todos = this.todos;
+    this.persistTodos();
+  }
+
   onNewTodoKeyDown(event) {
     if (event.which === 13) {
       let value = event.target.value.trim();
@@ -72,30 +76,32 @@ export default class TodoMVCApp extends Component {
 
   createTodo(title) {
     this.todos.push(new Todo(title));
-    this.todos = this.todos;
+    this.commitTodos();
   }
 
   removeTodo(todo) {
     this.todos = this.todos.filter(t => t !== todo);
+    this.persistTodos();
   }
 
   editTodo(todo, title) {
     todo.title = title;
-    this.todos = this.todos;
+    this.commitTodos();
   }
 
   toggleTodo(todo) {
     todo.toggle();
-    this.todos = this.todos;
+    this.commitTodos();
   }
 
   toggleAll() {
     let allCompleted = this.allCompleted;
     this.todos.forEach(todo => todo.completed = !allCompleted);
-    this.todos = this.todos;
+    this.commitTodos();
   }
 
   clearCompleted() {
     this.todos = this.activeTodos;
+    this.persistTodos();
   }
 }
