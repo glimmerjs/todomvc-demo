@@ -8,5 +8,13 @@ cache: yarn
 
 script: ember build
 
+deploy:
+  on:
+    branch: master
+    repo: glimmerjs/todomvc-demo
+  provider: script
+  script: bin/travis-deploy.sh
+  skip_cleanup: true
+
 notifications:
   email: false
