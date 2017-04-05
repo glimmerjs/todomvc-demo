@@ -17,5 +17,14 @@ module.exports = function(defaults) {
     outputFile: 'app.css',
   });
 
-  return new MergeTrees([app.toTree(), styles], { overwrite: true });
+  const vendorScripts = Concat('node_modules', {
+    inputFiles: ['todomvc-common/base.js'],
+    outputFile: 'vendor.js',
+  });
+
+  return new MergeTrees([
+    app.toTree(),
+    styles,
+    vendorScripts
+  ], { overwrite: true });
 };
