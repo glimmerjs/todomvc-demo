@@ -2,6 +2,7 @@ import Component, { tracked } from "@glimmer/component";
 import Navigo from 'navigo';
 import TodoStore from '../../../utils/todo-store';
 import Todo from '../../../utils/todo';
+import { ENTER } from '../../../utils/keys';
 
 const router = new Navigo(null, true);
 
@@ -63,7 +64,7 @@ export default class TodoMVCApp extends Component {
   }
 
   onNewTodoKeyDown(event) {
-    if (event.which === 13) {
+    if (event.which === ENTER) {
       let value = event.target.value.trim();
 
       if (value.length > 0) {

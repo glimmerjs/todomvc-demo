@@ -1,8 +1,6 @@
 import Component, { tracked } from "@glimmer/component";
 import Todo from '../../../utils/todo';
-
-const ENTER_KEY = 13;
-const ESCAPE_KEY = 27;
+import { ENTER, ESCAPE } from '../../../utils/keys';
 
 export default class TodoItem extends Component {
   element: Element;
@@ -39,9 +37,9 @@ export default class TodoItem extends Component {
   handleEditKeyUp(event) {
     this.newTitle = event.target.value.trim();
 
-    if (event.which === ENTER_KEY) {
+    if (event.which === ENTER) {
       this.commitEdit();
-    } else if (event.which === ESCAPE_KEY) {
+    } else if (event.which === ESCAPE) {
       this.abortEdit();
     }
   } 
