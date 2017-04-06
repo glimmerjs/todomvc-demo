@@ -51,7 +51,7 @@ export default class TodoMVCApp extends Component {
     return this.todos.length > 0;
   }
 
-  onNewTodoKeyDown(event) {
+  handleNewTodoKeyDown(event) {
     if (event.which === ENTER) {
       let value = event.target.value.trim();
 
