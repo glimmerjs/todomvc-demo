@@ -19,7 +19,7 @@ export default class TodoMVCApp extends Component {
     super(options);
 
     this.storage = new TodoStore();
-    this.todos = this.storage.restore();
+    this.todos = this.storage.fetch() || [];
 
     router
       .on({
