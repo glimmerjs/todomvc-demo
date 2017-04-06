@@ -6,6 +6,8 @@ node_js:
 
 cache: yarn
 
+install: yarn --frozen-lockfile
+
 script: ember build
 
 deploy:
