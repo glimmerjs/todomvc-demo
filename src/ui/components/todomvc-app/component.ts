@@ -6,11 +6,8 @@ import { ENTER } from '../../../utils/keys';
 
 const router = new Navigo(null, true);
 
-
-
 export default class TodoMVCApp extends Component {
-
-  storage: TodoStore;
+  todoStore: TodoStore;
 
   @tracked todos: Todo[] = [];
   @tracked mode: string = 'all';
@@ -18,8 +15,8 @@ export default class TodoMVCApp extends Component {
   constructor(options) {
     super(options);
 
-    this.storage = new TodoStore();
-    this.todos = this.storage.fetch() || [];
+    this.todoStore = new TodoStore();
+    this.todos = this.todoStore.fetch() || [];
 
     router
       .on({
@@ -54,15 +51,6 @@ export default class TodoMVCApp extends Component {
     return this.todos.length > 0;
   }
 
-  persistTodos() {
-    this.storage.store(this.todos);
-  }
-
-  commitTodos() {
-    this.todos = this.todos;
-    this.persistTodos();
-  }
-
   onNewTodoKeyDown(event) {
     if (event.which === ENTER) {
       let value = event.target.value.trim();
@@ -75,34 +63,37 @@ export default class TodoMVCApp extends Component {
     }
   }
 
-  createTodo(title) {
-    this.todos.push(new Todo(title));
-    this.commitTodos();
+  setTodos(todos) {
+    this.todos = todos;
+    this.todoStore.store(todos);
   }
 
-  removeTodo(todo) {
-    this.todos = this.todos.filter(t => t !== todo);
-    this.persistTodos();
+  createTodo(title) {
+    this.todos.push(new Todo(title));
+    this.setTodos(this.todos);
+  }
+
+  removeTodo(removedTodo) {
+    this.setTodos(this.todos.filter(todo => todo !== removedTodo))
   }
 
   editTodo(todo, title) {
     todo.title = title;
-    this.commitTodos();
+    this.setTodos(this.todos);
   }
 
   toggleTodo(todo) {
     todo.toggle();
-    this.commitTodos();
+    this.setTodos(this.todos);
   }
 
   toggleAll() {
     let allCompleted = this.allCompleted;
     this.todos.forEach(todo => todo.completed = !allCompleted);
-    this.commitTodos();
+    this.setTodos(this.todos);
   }
 
   clearCompleted() {
-    this.todos = this.activeTodos;
-    this.persistTodos();
+    this.setTodos(this.activeTodos);
   }
 }
