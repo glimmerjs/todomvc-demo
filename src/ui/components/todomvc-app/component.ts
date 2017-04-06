@@ -7,7 +7,7 @@ import { ENTER } from '../../../utils/keys';
 const router = new Navigo(null, true);
 
 export default class TodoMVCApp extends Component {
-  todoStore: TodoStore;
+  todoStore = new TodoStore();
 
   @tracked todos: Todo[] = [];
   @tracked mode: string = 'all';
@@ -63,37 +63,37 @@ export default class TodoMVCApp extends Component {
     }
   }
 
-  setTodos(todos) {
+  commitTodos(todos = this.todos) {
     this.todos = todos;
     this.todoStore.store(todos);
   }
 
   createTodo(title) {
     this.todos.push(new Todo(title));
-    this.setTodos(this.todos);
+    this.commitTodos();
   }
 
   removeTodo(removedTodo) {
-    this.setTodos(this.todos.filter(todo => todo !== removedTodo))
+    this.commitTodos(this.todos.filter(todo => todo !== removedTodo))
   }
 
   editTodo(todo, title) {
     todo.title = title;
-    this.setTodos(this.todos);
+    this.commitTodos();
   }
 
   toggleTodo(todo) {
     todo.toggle();
-    this.setTodos(this.todos);
+    this.commitTodos();
   }
 
   toggleAll() {
     let allCompleted = this.allCompleted;
     this.todos.forEach(todo => todo.completed = !allCompleted);
-    this.setTodos(this.todos);
+    this.commitTodos();
   }
 
   clearCompleted() {
-    this.setTodos(this.activeTodos);
+    this.commitTodos(this.activeTodos);
   }
 }
