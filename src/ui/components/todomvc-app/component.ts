@@ -78,8 +78,12 @@ export default class TodoMVCApp extends Component {
   }
 
   editTodo(todo, title) {
-    todo.title = title;
-    this.commitTodos();
+    if (/^\s*$/.test(title)) {
+      this.removeTodo(todo);
+    } else {
+      todo.title = title;
+      this.commitTodos();
+    }
   }
 
   toggleTodo(todo) {
