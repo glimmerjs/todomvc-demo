@@ -7,6 +7,8 @@ export default class TodoItem extends Component {
   args: {
     todo: Todo;
     onEdit: (Todo, string) => void;
+    onToggle: (Todo) => void;
+    onDestroy: (Todo) => void;
   };
 
   @tracked editing: boolean = false;
