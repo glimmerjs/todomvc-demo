@@ -1,9 +1,16 @@
 import Component, { tracked } from "@glimmer/component";
+import Todo from '../../../utils/todo';
 
 const ENTER_KEY = 13;
 const ESCAPE_KEY = 27;
 
 export default class TodoItem extends Component {
+  element: Element;
+  args: {
+    todo: Todo;
+    onEdit: (Todo, string) => void;
+  };
+
   @tracked editing: boolean = false;
   @tracked newTitle: string;
 
@@ -12,7 +19,8 @@ export default class TodoItem extends Component {
     this.newTitle = this.args.todo.title;
 
     requestAnimationFrame(() => {
-      this.element.querySelector('.js-edit').focus();
+      let input = this.element.querySelector('.js-edit') as HTMLElement;
+      input.focus();
     });
   }
 
