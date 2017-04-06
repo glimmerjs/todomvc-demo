@@ -1,4 +1,4 @@
-import Todo from '../ui/components/utils/todo';
+import Todo from './todo';
 
 export default class TodoStore {
 

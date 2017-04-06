@@ -1,7 +1,7 @@
 import Component, { tracked } from "@glimmer/component";
 import Navigo from 'navigo';
 import TodoStore from '../../../utils/todo-store';
-import Todo from '../utils/todo';
+import Todo from '../../../utils/todo';
 
 const router = new Navigo(null, true);
 
