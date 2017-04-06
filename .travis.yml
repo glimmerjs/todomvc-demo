@@ -8,6 +8,11 @@ cache: yarn
 
 install: yarn --frozen-lockfile
 
+# See http://stackoverflow.com/questions/31882306
+branches:
+  only: 
+    - master
+
 script: ember build
 
 deploy:
