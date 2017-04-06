@@ -3,7 +3,7 @@
     <h1>todos</h1>
     <input class="new-todo"
            placeholder="What needs to be done?"
-           onkeydown={{action onNewTodoKeyDown}}
+           onkeydown={{action handleNewTodoKeyDown}}
            autofocus>
   </header>
 
@@ -14,7 +14,7 @@
     {{/if}}
 
     <ul id="todo-list" class="todo-list">
-      {{#each visibleTodos key="id" as |todo|}}
+      {{#each visibleTodos key="_id" as |todo|}}
         <todo-item @todo={{todo}}
                    @onEdit={{action editTodo}}
                    @onToggle={{action toggleTodo}}
