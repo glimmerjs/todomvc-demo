@@ -15,6 +15,7 @@
     "@glimmer/component": "^0.3.8",
     "@glimmer/resolver": "^0.3.0",
     "broccoli-concat": "^3.2.2",
+    "broccoli-funnel": "^1.1.0",
     "broccoli-merge-trees": "^2.0.0",
     "ember-cli": "2.12.1",
     "ember-cli-inject-live-reload": "^1.6.1",
@@ -25,8 +26,8 @@
   },
   "private": true,
   "dependencies": {
+    "navigo": "^4.5.1",
     "todomvc-app-css": "^2.1.0",
-    "todomvc-common": "^1.0.3",
-    "navigo": "^4.5.1"
+    "todomvc-common": "^1.0.3"
   }
 }
