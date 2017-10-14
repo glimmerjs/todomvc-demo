@@ -7,7 +7,6 @@ import { ENTER } from '../../../utils/keys';
 const router = new Navigo(null, true);
 
 export default class TodoMVCApp extends Component {
-  todoStore = new TodoStore();
 
   @tracked todos: Todo[] = [];
   @tracked mode: string = 'all';
